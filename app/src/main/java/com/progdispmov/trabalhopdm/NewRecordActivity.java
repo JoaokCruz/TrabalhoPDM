@@ -13,11 +13,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class NewRecordActivity extends AppCompatActivity {
 
@@ -63,7 +65,7 @@ public class NewRecordActivity extends AppCompatActivity {
     {
         Listener listener = new Listener( id, getApplicationContext());
 
-        long tempoAtualizacao = 1;
+        long tempoAtualizacao = 5;
         float distancia = 0;
         if (ActivityCompat.checkSelfPermission(NewRecordActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(NewRecordActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;

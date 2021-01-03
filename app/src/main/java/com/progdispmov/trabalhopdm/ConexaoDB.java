@@ -120,7 +120,7 @@ public class ConexaoDB{
         StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
