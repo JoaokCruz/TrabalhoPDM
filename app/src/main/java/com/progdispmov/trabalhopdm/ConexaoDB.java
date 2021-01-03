@@ -3,6 +3,7 @@ package com.progdispmov.trabalhopdm;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +31,13 @@ public class ConexaoDB{
         StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                activity.Login( response );
+                JSONObject jsonObject = new JSONObject();
+                try{
+                    jsonObject = new JSONObject( response );
+                }catch (JSONException err){
+                    Log.d("Error", err.toString());
+                }
+                activity.Login( jsonObject );
             }
         }, new Response.ErrorListener() {
             @Override

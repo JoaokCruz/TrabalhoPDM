@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -21,9 +25,14 @@ public class LoginActivity extends AppCompatActivity {
         txtPassword = findViewById( R.id.inputPassword );
     }
 
-    public void Login( String name ){
+    public void Login( JSONObject json ){
         Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
-        intent.putExtra("name",name);
+        try{
+            intent.putExtra("name",String.valueOf( json.get("name")));
+            intent.putExtra( "id", String.valueOf( json.get("id") ) );
+        }catch (JSONException err){
+            Log.d("Error", err.toString());
+        }
         startActivity(intent);
     }
 
