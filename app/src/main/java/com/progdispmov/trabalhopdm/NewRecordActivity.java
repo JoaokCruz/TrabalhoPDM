@@ -5,17 +5,26 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.GnssAntennaInfo;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class NewRecordActivity extends AppCompatActivity {
 
     private LocationManager locationManager;
 
+
+    EditText local,data;
     Button btnScan;
 
     boolean isScanning = false;
@@ -25,20 +34,23 @@ public class NewRecordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_record);
 
+        data = (EditText) findViewById(R.id.inputDate);
+        local = (EditText) findViewById(R.id.inputPlace);
         btnScan = findViewById(R.id.btnScan);
 
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isScanning) {
-                    //exit activity and save to database
+                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+                    startActivity(intent);
                 } else {
+                    Bundle extras = getIntent().getExtras();
+                    String id = extras.getString("id");
                     isScanning = true;
                     btnScan.setText("Parar rastreamento");
-
                     locationManager = (LocationManager) NewRecordActivity.this.getSystemService(Context.LOCATION_SERVICE);
-
-
+                    new ConexaoDB().RegisterEntry(getApplicationContext(), NewRecordActivity.this,data.getText().toString(),local.getText().toString(),Integer.valueOf(id));
                 }
             }
         });
@@ -59,4 +71,5 @@ public class NewRecordActivity extends AppCompatActivity {
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, tempoAtualizacao, distancia, listener);
         //start scanning
     }
+
 }

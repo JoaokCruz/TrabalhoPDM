@@ -20,8 +20,11 @@ public class HomeActivity extends AppCompatActivity {
         btnEntry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String id;
+                Bundle extras = getIntent().getExtras();
                 Intent intent = new Intent( HomeActivity.this, NewRecordActivity.class );
-
+                id = extras.getString("id");
+                intent.putExtra("id",id);
                 startActivity( intent );
             }
         });

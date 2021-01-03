@@ -6,14 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".NewRecordActivity">
 
     <EditText
         android:id="@+id/inputDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="date" />
+        android:inputType="date"
+        android:hint="Data"
+        />
 
     <EditText
         android:id="@+id/inputPlace"
@@ -21,11 +23,12 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Local" />
+        android:text=""
+        android:hint="Local"/>
 
     <Button
         android:id="@+id/btnScan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Iniciar Rastreamento" />
+        android:text="Iniciar Rastreamento"/>
 </LinearLayout>

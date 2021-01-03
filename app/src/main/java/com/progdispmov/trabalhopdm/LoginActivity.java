@@ -45,4 +45,5 @@ public class LoginActivity extends AppCompatActivity {
         ConexaoDB conexao = new ConexaoDB();
         conexao.Login(getApplicationContext(), this, txtEmail.getText().toString(), txtPassword.getText().toString() );
     }
+
 }

@@ -42,7 +42,7 @@ public class ConexaoDB{
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -64,12 +64,13 @@ public class ConexaoDB{
        StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
            @Override
            public void onResponse(String response) {
-               Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+               Toast.makeText(context, "Registro feito com sucesso!", Toast.LENGTH_SHORT).show();
+               activity.toLogin();
            }
        }, new Response.ErrorListener() {
            @Override
            public void onErrorResponse(VolleyError error) {
-               Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+               Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
            }
        }) {
            @Override
@@ -96,7 +97,7 @@ public class ConexaoDB{
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -115,7 +116,7 @@ public class ConexaoDB{
 
     public void RegisterGeolocal( final Context context, final String latitude, final String longitude, final Integer registro_id ){
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url ="http://teyis.pythonanywhere.com/registerEntry";
+        String url ="http://teyis.pythonanywhere.com/registerGeolocal";
         StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
