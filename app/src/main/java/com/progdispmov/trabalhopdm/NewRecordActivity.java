@@ -42,6 +42,8 @@ public class NewRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isScanning) {
+                    locationManager.removeTestProvider( LocationManager.NETWORK_PROVIDER);
+                    locationManager.removeTestProvider( LocationManager.GPS_PROVIDER );
                     Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
                     startActivity(intent);
                 } else {
@@ -70,6 +72,7 @@ public class NewRecordActivity extends AppCompatActivity {
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, tempoAtualizacao, distancia, listener);
         //start scanning
+
     }
 
 }
