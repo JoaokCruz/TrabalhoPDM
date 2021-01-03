@@ -173,4 +173,35 @@ public class ConexaoDB{
         queue.add(sr);
     }
 
+    public void getGeolocals( final Context context, final MapActivity activity,  final Integer entry_id ){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url ="http://teyis.pythonanywhere.com/getGeolocals";
+        StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jsonObject = new JSONObject();
+                try{
+                    jsonObject = new JSONObject( response );
+                }catch (JSONException err){
+                    Log.d("Error", err.toString());
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("registro_id", String.valueOf( entry_id ) );
+                return params;
+            }
+
+        };
+        queue.add(sr);
+    }
+
 }
