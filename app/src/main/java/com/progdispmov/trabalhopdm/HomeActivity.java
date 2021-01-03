@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -24,7 +25,7 @@ import java.util.ListIterator;
 import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
-
+    List<HashMap<String,String>> lista;
     Button btnEntry;
     String [] de = {"txtDate", "txtLocal", "txtID"};
     int [] para = {R.id.txtDate,R.id.txtLocal,R.id.txtID};
@@ -54,8 +55,10 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+
+
     protected void updateEntry(JSONObject obj) {
-        List<HashMap<String,String>> lista = new ArrayList<>();
+        lista = new ArrayList<>();
         Iterator iterator = obj.keys();
         String key;
         while (iterator.hasNext()) {
@@ -64,9 +67,9 @@ public class HomeActivity extends AppCompatActivity {
                 HashMap<String,String> map = new HashMap<>();
                 if (obj.get(key) instanceof JSONObject) {
                     JSONObject xx = new JSONObject(obj.get(key).toString());
-                    map.put("data",xx.getString("data"));
-                    map.put("local",xx.getString("local"));
-                    map.put("id",xx.getString("id"));
+                    map.put("txtDate",xx.getString("data"));
+                    map.put("txtLocal",xx.getString("local"));
+                    map.put("txtID",xx.getString("id"));
                 }
                 lista.add(map);
             } catch (JSONException e) {
@@ -77,5 +80,16 @@ public class HomeActivity extends AppCompatActivity {
         ListView list = (ListView) findViewById(R.id.listView);
         SimpleAdapter adapter = new SimpleAdapter(this,lista , R.layout.list_item, de,para);
         list.setAdapter(adapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                HashMap<String,String> dados = lista.get(i);
+                Intent intent = new Intent(view.getContext(),MapActivity.class);
+                intent.putExtra("id",dados.get("id"));
+                startActivity(intent);
+            }
+        });
     }
+
+
 }
