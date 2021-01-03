@@ -21,13 +21,13 @@ import java.util.Map;
 public class ConexaoDB{
 
 
-    public void Login( final Context context, LoginActivity activity,final String email, final String password ){
+    public void Login( final Context context, final LoginActivity activity,final String email, final String password ){
         RequestQueue queue = Volley.newRequestQueue(context);
         String url ="http://teyis.pythonanywhere.com/login";
         StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                activity.Login( response );
             }
         }, new Response.ErrorListener() {
             @Override
@@ -48,7 +48,7 @@ public class ConexaoDB{
         queue.add(sr);
     }
 
-    public void Register( final Context context, SigninActivity activity, final String name, final String email, final String password ){
+    public void Register( final Context context, final SigninActivity activity, final String name, final String email, final String password ){
        RequestQueue queue = Volley.newRequestQueue(context);
        String url ="http://teyis.pythonanywhere.com/register";
        StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
