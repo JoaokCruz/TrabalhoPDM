@@ -21,7 +21,34 @@ import java.util.Map;
 public class ConexaoDB{
 
 
-    public void Inserir( final Context context ){
+    public void Login( final Context context, LoginActivity activity,final String email, final String password ){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url ="http://teyis.pythonanywhere.com/login";
+        StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", email);
+                params.put("senha", password);
+
+                return params;
+            }
+
+        };
+        queue.add(sr);
+    }
+
+    public void Register( final Context context, SigninActivity activity, final String name, final String email, final String password ){
        RequestQueue queue = Volley.newRequestQueue(context);
        String url ="http://teyis.pythonanywhere.com/register";
        StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -38,20 +65,71 @@ public class ConexaoDB{
            @Override
            protected Map<String, String> getParams() throws AuthFailureError {
                Map<String, String> params = new HashMap<String, String>();
-               params.put("name", "joao");
-               params.put("email", "joao@gmail.com");
-               params.put("senha", "123");
+               params.put("name", name);
+               params.put("email", email);
+               params.put("senha", password);
 
                return params;
            }
 
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String,String> params = new HashMap<String, String>();
-//                params.put("Content-Type","application/x-www-form-urlencoded");
-//                return params;
-//            }
        };
        queue.add(sr);
    }
+    public void RegisterEntry( final Context context, SigninActivity activity, final String data, final String local, final Integer usuario_id ){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url ="http://teyis.pythonanywhere.com/registerEntry";
+        StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("data", data);
+                params.put("local", local);
+                params.put("usuario_id", String.valueOf( usuario_id ));
+
+                return params;
+            }
+
+        };
+        queue.add(sr);
+    }
+
+    public void RegisterGeolocal( final Context context, SigninActivity activity, final String latitude, final String longitude, final Integer registro_id ){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url ="http://teyis.pythonanywhere.com/registerEntry";
+        StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("latitude", latitude);
+                params.put("longitude", longitude);
+                params.put("registro_id", String.valueOf( registro_id ));
+
+                return params;
+            }
+
+        };
+        queue.add(sr);
+    }
+
+
 }
