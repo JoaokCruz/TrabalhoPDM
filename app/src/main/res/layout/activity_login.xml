@@ -39,12 +39,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Entrar" />
+        android:text="Entrar"
+        android:onClick="onClickLogin"/>
 
     <Button
         android:id="@+id/btnSign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Cadastrar" />
+        android:text="Cadastrar"
+        android:onClick="onClickCadastro"/>
 </LinearLayout>

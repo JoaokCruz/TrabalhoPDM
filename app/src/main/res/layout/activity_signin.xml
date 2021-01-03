@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Nome" />
+        android:text=""
+        android:hint="Nome"/>
 
     <EditText
         android:id="@+id/inputEmail"
@@ -22,7 +23,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:text="Email" />
+        android:text=""
+        android:hint="Email"/>
 
     <EditText
         android:id="@+id/inputPassword"
@@ -30,7 +32,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="Senha" />
+        android:text=""
+        android:hint="Senha"/>
 
     <Button
         android:id="@+id/btnCadastrar"
