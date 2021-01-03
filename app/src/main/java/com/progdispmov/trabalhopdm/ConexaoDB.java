@@ -142,5 +142,35 @@ public class ConexaoDB{
         queue.add(sr);
     }
 
+    public void getEntries( final Context context, final HomeActivity activity,  final Integer user_id ){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url ="http://teyis.pythonanywhere.com/getEntrys";
+        StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jsonObject = new JSONObject();
+                try{
+                    jsonObject = new JSONObject( response );
+                }catch (JSONException err){
+                    Log.d("Error", err.toString());
+                }
+                activity.updateEntry( jsonObject );
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("usuario_id", String.valueOf( user_id ) );
+                return params;
+            }
+
+        };
+        queue.add(sr);
+    }
 
 }
