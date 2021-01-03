@@ -61,8 +61,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<String, String>();
-                params.put("name","lucas");
-                params.put("email","lucas@gmail.com");
+                params.put("name","joao");
+                params.put("email","joao@gmail.com");
                 params.put("senha", "123");
 
                 return params;
