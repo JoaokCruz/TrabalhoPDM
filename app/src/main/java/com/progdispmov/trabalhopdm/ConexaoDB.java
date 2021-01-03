@@ -75,13 +75,13 @@ public class ConexaoDB{
        };
        queue.add(sr);
    }
-    public void RegisterEntry( final Context context, SigninActivity activity, final String data, final String local, final Integer usuario_id ){
+    public void RegisterEntry( final Context context, final NewRecordActivity activity, final String data, final String local, final Integer usuario_id ){
         RequestQueue queue = Volley.newRequestQueue(context);
         String url ="http://teyis.pythonanywhere.com/registerEntry";
         StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                activity.startScanning(Integer.valueOf( response ));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -103,7 +103,7 @@ public class ConexaoDB{
         queue.add(sr);
     }
 
-    public void RegisterGeolocal( final Context context, SigninActivity activity, final String latitude, final String longitude, final Integer registro_id ){
+    public void RegisterGeolocal( final Context context, final String latitude, final String longitude, final Integer registro_id ){
         RequestQueue queue = Volley.newRequestQueue(context);
         String url ="http://teyis.pythonanywhere.com/registerEntry";
         StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

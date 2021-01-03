@@ -38,20 +38,25 @@ public class NewRecordActivity extends AppCompatActivity {
 
                     locationManager = (LocationManager) NewRecordActivity.this.getSystemService(Context.LOCATION_SERVICE);
 
-                    Listener listener = new Listener();
 
-                    long tempoAtualizacao = 1;
-                    float distancia = 0;
-                    if (ActivityCompat.checkSelfPermission(NewRecordActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(NewRecordActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        return;
-                    }
-                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, tempoAtualizacao, distancia, listener);
-
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, tempoAtualizacao, distancia, listener);
-                    //start scanning
                 }
             }
         });
 
+    }
+
+    protected void startScanning( Integer id )
+    {
+        Listener listener = new Listener( id, getApplicationContext());
+
+        long tempoAtualizacao = 1;
+        float distancia = 0;
+        if (ActivityCompat.checkSelfPermission(NewRecordActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(NewRecordActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, tempoAtualizacao, distancia, listener);
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, tempoAtualizacao, distancia, listener);
+        //start scanning
     }
 }
