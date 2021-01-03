@@ -66,21 +66,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         Iterator iterator = obj.keys();
 
-        do
-        {
-            String key = String.valueOf( iterator.next() );
-            JSONObject keyObj = new JSONObject();
-            try {
-                keyObj = obj.getJSONObject( key );
-                Double latitude = Double.valueOf((Double) keyObj.get("latitude"));
-                Double longitude = Double.valueOf((Double) keyObj.get("longitude"));
-                latLngs.add( new LatLng(latitude, longitude) );
+        if( iterator.hasNext() ) {
+            do {
+                String key = String.valueOf(iterator.next());
+                JSONObject keyObj = new JSONObject();
+                try {
+                    keyObj = obj.getJSONObject(key);
+                    Double latitude = Double.valueOf( keyObj.get("latitude").toString());
+                    Double longitude = Double.valueOf(keyObj.get("longitude").toString());
+                    latLngs.add(new LatLng(latitude, longitude));
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-        }while( iterator.hasNext() );
+            } while (iterator.hasNext());
+        }
 
         line.addAll( latLngs );
         map.addPolyline( line );

@@ -85,7 +85,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 HashMap<String,String> dados = lista.get(i);
                 Intent intent = new Intent(view.getContext(),MapActivity.class);
-                intent.putExtra("id",dados.get("id"));
+                intent.putExtra("id",dados.get("txtID"));
                 startActivity(intent);
             }
         });

@@ -185,6 +185,7 @@ public class ConexaoDB{
                 }catch (JSONException err){
                     Log.d("Error", err.toString());
                 }
+                activity.setMap( jsonObject );
 
             }
         }, new Response.ErrorListener() {
