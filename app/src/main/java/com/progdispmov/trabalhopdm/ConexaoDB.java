@@ -31,13 +31,17 @@ public class ConexaoDB{
         StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                JSONObject jsonObject = new JSONObject();
-                try{
-                    jsonObject = new JSONObject( response );
-                }catch (JSONException err){
-                    Log.d("Error", err.toString());
+                if(!(response.equals(""))) {
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject = new JSONObject(response);
+                    } catch (JSONException err) {
+                        Log.d("Error", err.toString());
+                    }
+                    activity.Login(jsonObject);
+                } else {
+                    Toast.makeText(context, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
                 }
-                activity.Login( jsonObject );
             }
         }, new Response.ErrorListener() {
             @Override
